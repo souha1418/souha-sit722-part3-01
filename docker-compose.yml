@@ -1,1 +1,34 @@
 # Your Solution
+version: '3.9'
+services:
+
+  book_catalog:
+    image: sit722week0702.azurecr.io/book_catalog:latest
+    build: 
+      context: .  # Set the build context to the root directory
+      dockerfile: book_catalog/Dockerfile  # Path to Dockerfile relative to the context
+    container_name: book_catalog_service
+    ports:
+     - "4000:80"
+    environment:
+     DATABASE_URL: "postgresql://sit722_part3_user:MdwAsc0tjC0B20e0DCkvmjWyeAIxdeGR@dpg-cr7rncrtq21c739euie0-a.oregon-postgres.render.com/sit722_part3"  # Replace with your actual database URL
+
+   #   - PORT=8000
+   #   - STORAGE_ACCOUNT_NAME=sit722week0702
+   #   - STORAGE_ACCESS_KEY=w2PUhNlfCtSht1rUyTfTodR8NavtkASU2It2Usipgf+ACRBnlj7k
+    restart: "no"
+
+  inventory_management:
+    image: sit722week0702.azurecr.io/inventory_management:latest
+    build: 
+      context: .  # Set the build context to the root directory
+      dockerfile: inventory_management/Dockerfile  # Path to Dockerfile relative to the context
+    container_name: inventory_management_service
+    ports:
+     - "4001:80"
+    environment:
+     DATABASE_URL: "postgresql://sit722_part3_user:MdwAsc0tjC0B20e0DCkvmjWyeAIxdeGR@dpg-cr7rncrtq21c739euie0-a.oregon-postgres.render.com/sit722_part3"  # Replace with your actual database URL
+    # - PORT=8000
+    #  - STORAGE_ACCOUNT_NAME=sit722week0702
+    #  - STORAGE_ACCESS_KEY=w2PUhNlfCtSht1rUyTfTodR8NavtkASU2It2Usipgf+ACRBnlj7k
+    restart: "no"
